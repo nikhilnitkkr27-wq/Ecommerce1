@@ -1,0 +1,23 @@
+import { ButtonHTMLAttributes } from 'react';
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'danger';
+}
+
+export default function Button({ variant = 'primary', className = '', children, ...props }: ButtonProps) {
+  const baseClasses = 'px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50';
+  const variantClasses = {
+    primary: 'bg-orange-600 hover:bg-orange-700 text-white',
+    secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-800',
+    danger: 'bg-red-600 hover:bg-red-700 text-white',
+  };
+
+  return (
+    <button
+      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}
